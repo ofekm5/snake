@@ -37,18 +37,20 @@ bool is_game_end()
     return result;
 }
 
-
 void start_game()
 {
     while (true)
     {
         snake.update_movement();
+        snake.check_movement(snake_map.get_food());
         if (is_game_end())
         {
             cout << "GAME IS OVER" << endl;
             snake.terminate_input_thread();
             break;
         }
+        snake_map.clear_map();
+        snake_map.update_items_location();
         snake_map.redraw();
 
         usleep(PAUSE_LENGTH);

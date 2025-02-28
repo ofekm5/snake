@@ -12,43 +12,50 @@ using namespace std;
 SnakeMap::SnakeMap(Snake *snake)
 {
     this->snake = snake;
-    clear_map(this->map_array);
+    this->clear_map();
     srand(time(NULL));
     update_snake_food();
 }
 
-void SnakeMap::redraw(void)
-{
-    clear_map(this->map_array);
-    for (int i = 0; i < MAP_END; i++)
-    {
-        cout << endl;
-    }
+void SnakeMap::update_items_location(){
+    this->update_snake_location();
+    this->update_food_location();
+}
 
+void SnakeMap::update_snake_location(){
     vector<pair<int, int>> snake_parts = snake->snake_parts;
     for (int i = 0; i < snake_parts.size(); i++)
     {
         pair<int, int> tmp = snake_parts[i];
-        map_array[tmp.first][tmp.second] = SNAKE_CHAR;
+        this->map_array[tmp.first][tmp.second] = SNAKE_CHAR;
     }
 
-    update_snake_head(map_array, snake);
+    this->update_snake_head();
+}
 
+void SnakeMap::update_food_location(){
     if (snake->food_eaten){
         this->update_snake_food();
     }
+    this->map_array[snake_food.first][snake_food.second] = SNAKE_FOOD_CHAR;
+}
 
-    map_array[snake_food.first][snake_food.second] = SNAKE_FOOD_CHAR;
+pair<int, int> SnakeMap::get_food(){
+    return this->snake_food;
+}
+
+void SnakeMap::redraw(void)
+{
     for (int i = 0; i < MAP_HEIGHT; i++)
     {
         for (int j = 0; j < MAP_WIDTH; j++)
         {
-            cout << map_array[i][j] << " ";
+            cout << "\033[33m" << this->map_array[i][j] << "\033[0m" << " ";
         }
         cout << endl;
     }
 
-    update_score(); // TODO: I have moved it to here from the start of the function
+    draw_score(); 
 }
 
 void SnakeMap::update_snake_food()
@@ -56,30 +63,34 @@ void SnakeMap::update_snake_food()
     while (true){
         int random_i = rand() % MAP_WIDTH;
         int random_j = rand() % MAP_HEIGHT;
-        if (map_array[random_i][random_j] == MAP_CHAR){
-            snake_food = make_pair(random_i, random_j);
-            snake->set_snake_food(snake_food);
+        if (this->map_array[random_i][random_j] == MAP_CHAR){
+            this->snake_food = make_pair(random_i, random_j);
             snake->food_eaten = false;
             break;
         }
     }
 }
 
-void clear_map(char map_array[MAP_HEIGHT][MAP_WIDTH])
+void SnakeMap::clear_map()
 {
     for (int i = 0; i < MAP_HEIGHT; i++)
     {
         for (int j = 0; j < MAP_WIDTH; j++)
         {
-            map_array[i][j] = MAP_CHAR;
+            this->map_array[i][j] = MAP_CHAR;
         }
+    }
+
+    for (int i = 0; i < MAP_END; i++)
+    {
+        cout << endl;
     }
 }
 
-void update_snake_head(char map_array[MAP_HEIGHT][MAP_WIDTH], Snake *snake)
+void SnakeMap::update_snake_head()
 {
     char snake_head_char = SNAKE_CHAR;
-    enum Direction direction = snake->get_direction();
+    enum Direction direction = this->snake->get_direction();
     switch (direction)
     {
         case West:
@@ -95,11 +106,11 @@ void update_snake_head(char map_array[MAP_HEIGHT][MAP_WIDTH], Snake *snake)
             snake_head_char = SNAKE_HEAD_SOUTH;
             break;
     }
-    pair<int, int> snake_head = snake->snake_head;
-    map_array[snake_head.first][snake_head.second] = snake_head_char;
+    pair<int, int> snake_head = this->snake->snake_head;
+    this->map_array[snake_head.first][snake_head.second] = snake_head_char;
 }
 
-void SnakeMap::update_score(void)
+void SnakeMap::draw_score(void)
 {
     cout << "Score:" << snake->length << endl;
 }

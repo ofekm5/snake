@@ -123,6 +123,9 @@ void Snake::update_movement(void)
     }
     snake_head = movement_part;
     snake_parts.push_back(movement_part);
+}
+
+void Snake::check_movement(pair<int, int> snake_food){
     food_eaten = snake_head.first == snake_food.first && snake_head.second == snake_food.second;
     if (food_eaten)
     {
@@ -134,16 +137,12 @@ void Snake::update_movement(void)
         snake_world_array[tail.first][tail.second]--;
         snake_parts.erase(snake_parts.begin());
     }
+
     int head_value = ++snake_world_array[snake_head.first][snake_head.second];
     if (head_value > 1)
     {
         this->dead = true;
     }
-}
-
-void Snake::set_snake_food(pair<int, int> snake_food)
-{
-    this->snake_food = snake_food;
 }
 
 void Snake::clear_snake_world(void)
