@@ -1,0 +1,45 @@
+snake-master/.gitignoreZone.Identifier
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+/snake
+snake-master/snake_map.cppZone.Identifier
+snake-master/snake_map.hZone.Identifier
+snake-master/snakeZone.Identifier
+snake-master/snake.hZone.Identifier
+snake-master/snake.cppZone.Identifier
+snake-master/README.mdZone.Identifier
+snake-master/makefileZone.Identifier
+snake-master/main.cppZone.Identifier
+snake-master/macros.hZone.Identifier
+snake-master/input.hZone.Identifier
+snake-master/input.cppZone.Identifier
+snake-master/c snake game.pngZone.Identifier
