@@ -139,7 +139,7 @@ void Snake::check_movement(pair<int, int> snake_food){
     }
 
     int head_value = ++snake_world_array[snake_head.first][snake_head.second];
-    if (head_value > 1)
+    if (head_value > 1 || (snake_head.first < 0 || snake_head.first >= MAP_HEIGHT || snake_head.second < 0 || snake_head.second >= MAP_WIDTH))
     {
         this->dead = true;
     }

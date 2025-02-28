@@ -11,7 +11,7 @@
 #define SNAKE_HEAD_EAST '<'
 #define SNAKE_HEAD_SOUTH '^'
 #define SNAKE_FOOD_CHAR '*'
-
+#define SNAKE_FOOD_PATH 'p'
 #define INITIAL_SNAKE_LENGTH 3
 
 #define PAUSE_LENGTH 1000 * 200 // 200 milliseconds

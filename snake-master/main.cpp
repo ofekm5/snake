@@ -22,28 +22,14 @@ void initialize()
     input_enter_off();
 }
 
-bool is_game_end()
-{
-    bool result = false;
-    pair<int, int> snake_head = snake.snake_head;
-    if (snake_head.first < 0 || snake_head.first >= MAP_HEIGHT || snake_head.second < 0 || snake_head.second >= MAP_WIDTH)
-    {
-        result = true;
-    }
-    else if (snake.is_dead())
-    {
-        result = true;
-    }
-    return result;
-}
-
 void start_game()
 {
     while (true)
     {
         snake.update_movement();
+        snake_map.wait_for_food_thread();
         snake.check_movement(snake_map.get_food());
-        if (is_game_end())
+        if (snake.is_dead())
         {
             cout << "GAME IS OVER" << endl;
             snake.terminate_input_thread();
