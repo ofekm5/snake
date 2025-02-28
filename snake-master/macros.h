@@ -13,7 +13,7 @@
 #define SNAKE_FOOD_CHAR '*'
 #define SNAKE_FOOD_PATH 'p'
 #define INITIAL_SNAKE_LENGTH 3
-
+#define ITER_TO_SHOW_PATH 2
 #define PAUSE_LENGTH 1000 * 200 // 200 milliseconds
 
 #endif

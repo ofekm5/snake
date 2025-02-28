@@ -1,0 +1,20 @@
+Thinking Process:
+a. playing the game as it is - figuring out the UI and thinking simultaneously about features to add
+b. Dig in the code about: gracefully stopping the snake movement(input) thread and identifies ow food is being placed inside the map
+c. improve readability(changing functions names, splitting functions) 
+d. decouple food data from snake in order to update food XY seamlessly
+e. adding food thread for updating position of fruit
+g. implementing BFS in main thread for finding the shortest path. I thought about adding it to the food thread but the snakemap everlasting changing because the snake parts.
+
+
+Solving the algorithmic problem:
+Right from the start, a brute force approach, like of calculating distance between points and iterating throught the entire board, did not seem very efficient. 
+BFS and Dijkstra crossed my mind afterwards, I chose BFS because the map could be reducted to a unweighted graph. I chose to not limit by some N the mode, but limit with a condition: when BFS canot calculate anymore the shortest path it will stop indefinetly.
+
+
+Proposed features:
+1. Logging to a file in case of unexpected crushes
+2. After "Game Over", a "Play again?" question will be presented to the user
+3. Start the game with "enter" button(currently immediate start without any preperation)
+4. Diffeculty levels that will be dependent with both speed of snake and smarter algorithm for placing the food
+5. All-time records/Top 5 presentation after game Over

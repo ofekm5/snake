@@ -3,6 +3,9 @@
 
 #include "snake.h"
 #include "macros.h"
+#include <queue>
+#include <map>
+#include <algorithm>
 
 void* food_thread_task(void *arg);
 
@@ -18,7 +21,12 @@ class SnakeMap
     void set_next_snake_food(pair<int,int> i_pair);
     void wait_for_food_thread();
   private:
-  void schedule_next_food_task();
+    bool stop_bfs;
+    int presentingPathIterations;
+    vector<pair<int,int>> shortest_path;
+    vector<pair<int, int>> form_path(pair<int, int> food_position, pair<int,int> prev_snake_food, map<pair<int, int>, pair<int, int>> parent);
+    void schedule_next_food_task();
+    vector<pair<int,int>> bfs(pair<int,int> next_snake_food, pair<int,int> prev_snake_food);
     char map_array[MAP_HEIGHT][MAP_WIDTH];
     pthread_t food_thread;
     void update_snake_food();
@@ -34,9 +42,5 @@ class SnakeMap
     void update_snake_food_and_path();
 };
 
-struct FoodThreadArgs {
-  SnakeMap* map;
-  std::pair<int, int> curr_food;
-};
 
 #endif

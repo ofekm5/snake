@@ -38,6 +38,14 @@ Snake::Snake(void)
     pthread_create(&input_thread, NULL, input_thread_work, this);
 }
 
+bool Snake::isFoodEaten(){
+    return this->food_eaten;
+}
+
+void Snake::set_food_eaten(bool i_status){
+    this->food_eaten = i_status;
+}
+
 void Snake::update_direction(enum Direction direction)
 {
     sem_wait(&this->snake_sema);

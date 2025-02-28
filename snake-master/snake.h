@@ -22,13 +22,15 @@ class Snake
     pair<int, int> snake_head;
     void update_movement();
     bool is_dead();
-    bool food_eaten;
+    bool isFoodEaten();
+    void set_food_eaten(bool i_status);
     int length;
     void terminate_input_thread();
     void check_movement(pair<int, int> snake_food);
   private:
     bool dead;
     void drop_dead();
+    bool food_eaten;
     pthread_t input_thread;
     sem_t snake_sema;
     enum Direction direction;
